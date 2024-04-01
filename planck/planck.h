@@ -14,6 +14,8 @@ enum planck_ez_keycodes {
     TOGGLE_LAYER_COLOR,
 };
 
+#define RGB_LTOG TOGGLE_LAYER_COLOR
+
 #ifndef WEBUSB_ENABLE
 #    define WEBUSB_PAIR KC_NO
 #endif
