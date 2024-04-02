@@ -15,7 +15,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_planck_grid(
      MT(KC_NO,KC_Q), MT(KC_NO,KC_W), MT(KC_NO,KC_E),   MT(KC_NO,KC_R),  MT(KC_NO,KC_T), KC_NO, KC_NO, MT(KC_NO,KC_Y), MT(KC_NO,KC_U),  MT(KC_NO,KC_I),  MT(KC_NO,KC_O), MT(KC_NO,KC_P),
      LSFT_T(KC_A),   LT(_NUM,KC_S),  LT(_NAVIGO,KC_D), LT(_LSYMB,KC_F), MT(KC_NO,KC_G), KC_NO, KC_NO, MT(KC_NO,KC_H), LT(_RSYMB,KC_J), LT(_MOUSE,KC_K), LT(_FUNC,KC_L), LSFT_T(KC_SCLN),
-     MT(KC_NO,KC_Z), LCTL_T(KC_X),   LALT_T(KC_C),     MT(KC_NO,KC_V),  MT(KC_NO,KC_B), KC_NO, KC_NO, MT(KC_NO,KC_N), MT(KC_NO,KC_M),  LALT_T(KC_COMM), LCTL_T(KC_DOT), KC_SLSH,
+     MT(KC_NO,KC_Z), LCTL_T(KC_X),   LALT_T(KC_C),     MT(KC_NO,KC_V),  MT(KC_NO,KC_B), KC_NO, KC_NO, MT(KC_NO,KC_N), MT(KC_NO,KC_M),  LALT_T(KC_COMM), LCTL_T(KC_DOT), MT(KC_NO,KC_SLSH),
      KC_NO,          KC_NO,          KC_NO,            LGUI_T(KC_SPC),  KC_BSPC,  MO(_ACCESS), KC_NO, SC_SENT,        RALT_T(KC_TAB),  KC_NO,           KC_NO,          KC_NO
   ),
   [_MOUSE] = LAYOUT_planck_grid(
@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_TRNS,       KC_TRNS,  KC_TRNS,  KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,      KC_TRNS, KC_TRNS
   ),
   [_RSYMB] = LAYOUT_planck_grid(
-    KC_GRV,  KC_BSLS,       KC_LPRN,  KC_RPRN,  KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,      KC_TRNS, KC_TRNS,
+    KC_GRV,  KC_BSLS,       KC_LPRN,  KC_RPRN,  KC_PSLS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,      KC_TRNS, KC_TRNS,
     KC_CIRC, KC_DLR,        KC_UNDS,  KC_PLUS,  KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,      KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS,       KC_MINUS, KC_EQUAL, KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,      KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS,       KC_TRNS,  KC_TRNS,  KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,      KC_TRNS, KC_TRNS
@@ -83,7 +83,7 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
     {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},            {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF}
   },
   [3] = {
-    {HSV_PURPLE}, {HSV_PURPLE}, {HSV_CYAN},   {HSV_CYAN},   {HSV_OFF},    {HSV_OFF}, {HSV_OFF}, {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},
+    {HSV_PURPLE}, {HSV_PURPLE}, {HSV_CYAN},   {HSV_CYAN},   {HSV_PURPLE}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},
     {HSV_PURPLE}, {HSV_PURPLE}, {HSV_CYAN},   {HSV_CYAN},   {HSV_OFF},    {HSV_OFF}, {HSV_OFF}, {HSV_OFF},    {HSV_RED},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},
     {HSV_OFF},    {HSV_OFF},    {HSV_CYAN},   {HSV_CYAN},   {HSV_OFF},    {HSV_OFF}, {HSV_OFF}, {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},
     {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},            {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF}
