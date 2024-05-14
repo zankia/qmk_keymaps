@@ -64,49 +64,49 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
-  [0] = {
+  [_BASE] = {
     {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_OFF}, {HSV_OFF}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE},
     {HSV_CYAN},   {HSV_RED},    {HSV_RED},    {HSV_PURPLE}, {HSV_PURPLE}, {HSV_OFF}, {HSV_OFF}, {HSV_PURPLE}, {HSV_RED},    {HSV_RED},    {HSV_RED},    {HSV_CYAN},
     {HSV_PURPLE}, {HSV_CYAN},   {HSV_CYAN},   {HSV_PURPLE}, {HSV_PURPLE}, {HSV_OFF}, {HSV_OFF}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_CYAN},   {HSV_CYAN},   {HSV_PURPLE},
     {HSV_WHITE},  {HSV_OFF},    {HSV_OFF},    {HSV_CYAN},   {HSV_CYAN},   {HSV_RED},            {HSV_CYAN},   {HSV_CYAN},   {HSV_OFF},    {HSV_OFF},    {HSV_OFF}
   },
-  [1] = {
+  [_MOUSE] = {
     {HSV_OFF},    {HSV_CYAN},   {HSV_PURPLE}, {HSV_CYAN},   {HSV_CYAN},    {HSV_OFF}, {HSV_OFF}, {HSV_OFF},   {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},
     {HSV_OFF},    {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_CYAN},    {HSV_OFF}, {HSV_OFF}, {HSV_OFF},   {HSV_CYAN},   {HSV_RED},    {HSV_CYAN},   {HSV_OFF},
     {HSV_OFF},    {HSV_CYAN},   {HSV_OFF},    {HSV_CYAN},   {HSV_CYAN},    {HSV_OFF}, {HSV_OFF}, {HSV_OFF},   {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},
     {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},     {HSV_OFF},            {HSV_OFF},   {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF}
   },
-  [2] = {
+  [_NAVIGO] = {
     {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF}, {HSV_OFF}, {HSV_OFF},    {HSV_CYAN},   {HSV_PURPLE}, {HSV_CYAN},   {HSV_OFF},
     {HSV_OFF},    {HSV_GREEN},  {HSV_RED},    {HSV_CYAN},   {HSV_OFF},    {HSV_OFF}, {HSV_OFF}, {HSV_CYAN},   {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_OFF},
     {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF}, {HSV_OFF}, {HSV_CYAN},   {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},
     {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},            {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF}
   },
-  [3] = {
+  [_RSYMB] = {
     {HSV_PURPLE}, {HSV_PURPLE}, {HSV_CYAN},   {HSV_CYAN},   {HSV_PURPLE}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},
     {HSV_PURPLE}, {HSV_PURPLE}, {HSV_CYAN},   {HSV_CYAN},   {HSV_OFF},    {HSV_OFF}, {HSV_OFF}, {HSV_OFF},    {HSV_RED},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},
     {HSV_OFF},    {HSV_OFF},    {HSV_CYAN},   {HSV_CYAN},   {HSV_OFF},    {HSV_OFF}, {HSV_OFF}, {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},
     {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},            {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF}
   },
-  [4] = {
+  [_LSYMB] = {
     {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF}, {HSV_OFF}, {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},
     {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_RED},    {HSV_OFF},    {HSV_OFF}, {HSV_OFF}, {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},
     {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF}, {HSV_OFF}, {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},
     {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},            {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF}
   },
-  [5] = {
+  [_FUNC] = {
     {HSV_OFF},    {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},
     {HSV_OFF},    {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},    {HSV_OFF},    {HSV_CYAN},   {HSV_RED},    {HSV_OFF},
     {HSV_OFF},    {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_OFF}, {HSV_OFF}, {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},
     {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},            {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF}
   },
-  [6] = {
+  [_NUM] = {
     {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF}, {HSV_OFF}, {HSV_CYAN},   {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_CYAN},
     {HSV_OFF},    {HSV_RED},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF}, {HSV_OFF}, {HSV_CYAN},   {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_CYAN},
     {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF}, {HSV_OFF}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_CYAN},
     {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},            {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF},    {HSV_OFF}
   },
-  [7] = {
+  [_ACCESS] = {
     {HSV_CYAN},   {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_GREEN},  {HSV_OFF}, {HSV_OFF}, {HSV_GREEN},  {HSV_OFF},    {HSV_PURPLE}, {HSV_OFF},    {HSV_ORANGE},
     {HSV_OFF},    {HSV_PURPLE}, {HSV_PURPLE}, {HSV_CYAN},   {HSV_GREEN},  {HSV_OFF}, {HSV_OFF}, {HSV_GREEN},  {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_ORANGE},
     {HSV_CYAN},    {HSV_OFF},    {HSV_CYAN},   {HSV_PURPLE}, {HSV_GREEN},  {HSV_OFF}, {HSV_OFF}, {HSV_ORANGE}, {HSV_ORANGE}, {HSV_ORANGE}, {HSV_ORANGE}, {HSV_WHITE},
@@ -149,3 +149,35 @@ bool rgb_matrix_indicators_user(void) {
   return true;
 }
 
+#ifdef ENCODER_ENABLE
+bool encoder_update_user(uint8_t index, bool clockwise) {
+    if (clockwise) {
+        switch (get_highest_layer(layer_state)) {
+            case _MOUSE:
+                register_code(KC_LGUI);
+                tap_code(KC_RIGHT);
+                unregister_code(KC_LGUI);
+                break;
+            case _ACCESS:
+                tap_code(KC_VOLU);
+                break;
+            default:
+                tap_code(KC_MS_WH_RIGHT);
+        }
+    } else { // anti clockwise
+        switch (get_highest_layer(layer_state)) {
+            case _MOUSE:
+                register_code(KC_LGUI);
+                tap_code(KC_LEFT);
+                unregister_code(KC_LGUI);
+                break;
+            case _ACCESS:
+                tap_code(KC_VOLD);
+                break;
+            default:
+                tap_code(KC_MS_WH_LEFT);
+        }
+    }
+    return false;
+}
+#endif
