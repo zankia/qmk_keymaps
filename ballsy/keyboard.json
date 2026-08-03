@@ -1,0 +1,28 @@
+{
+    "keyboard_name": "Ballsy",
+    "manufacturer": "zankia",
+    "maintainer": "zankia",
+    "usb": {
+        "vid": "0x027E",
+        "pid": "0x0001",
+        "device_version": "1.0.0"
+    },
+    "processor": "RP2040",
+    "bootloader": "rp2040",
+    "features": {
+        "mousekey": true,
+        "pointing_device": true
+    },
+    "diode_direction": "COL2ROW",
+    "matrix_pins": {
+        "direct": [["GP8", "GP9"]]
+    },
+    "layouts": {
+        "LAYOUT": {
+            "layout": [
+                {"x": 0, "y": 0, "matrix": [0, 0]},
+                {"x": 0, "y": 1, "matrix": [0, 1]}
+            ]
+        }
+    }
+}
