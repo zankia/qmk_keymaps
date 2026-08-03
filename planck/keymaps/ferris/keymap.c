@@ -19,9 +19,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      QK_MOUSE_BUTTON_3, QK_MOUSE_BUTTON_2, QK_MOUSE_BUTTON_1, LGUI_T(KC_SPC), KC_BSPC,  MO(_ACCESS), KC_NO, SC_SENT,  RALT_T(KC_TAB),  KC_NO,           KC_NO,          KC_NO
   ),
   [_MOUSE] = LAYOUT_planck_grid(
-    KC_TRNS, KC_BTN2,       KC_MS_U,  KC_BTN1,  KC_BTN3,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,      KC_TRNS, KC_TRNS,
-    KC_TRNS, KC_MS_L,       KC_MS_D,  KC_MS_R,  KC_WH_U,     KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN1,  KC_NO,        KC_BTN2, KC_TRNS,
-    KC_TRNS, KC_WH_L,       KC_TRNS,  KC_WH_R,  KC_WH_D,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,      KC_TRNS, KC_TRNS,
+    KC_TRNS, MS_BTN2,       MS_UP,    MS_BTN1,  MS_BTN3,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,      KC_TRNS, KC_TRNS,
+    KC_TRNS, MS_LEFT,       MS_DOWN,  MS_RGHT,  MS_WHLU,     KC_TRNS, KC_TRNS, KC_TRNS, MS_BTN1,  KC_NO,        MS_BTN2, KC_TRNS,
+    KC_TRNS, MS_WHLL,       KC_TRNS,  MS_WHLR,  MS_WHLD,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,      KC_TRNS, KC_TRNS,
     KC_TRNS, KC_TRNS,       KC_TRNS,  KC_TRNS,  KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,      KC_TRNS, KC_TRNS
   ),
   [_NAVIGO] = LAYOUT_planck_grid(
@@ -56,9 +56,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_TRNS,       KC_TRNS,  KC_TRNS,  KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,      KC_TRNS, KC_TRNS
   ),
   [_ACCESS] = LAYOUT_planck_grid(
-    KC_ESC,  LSFT(KC_Z),    KC_COMM,  KC_X,     KC_PSCR,     KC_TRNS, KC_TRNS, KC_BRIU, KC_TRNS,  KC_MSTP,      KC_TRNS, RGB_VAI,
-    KC_TRNS, KC_PAST,       KC_LBRC,  KC_ENT,   LCTL(KC_I),  KC_TRNS, KC_TRNS, KC_BRID, KC_MPRV,  KC_MPLY,      KC_MNXT, RGB_VAD,
-    KC_CAPS, KC_TRNS,       KC_APP,   KC_EXLM, LCTL(KC_DOT), KC_TRNS, KC_TRNS, RGB_HUI, RGB_RMOD, RGB_TOG,      RGB_MOD, QK_BOOT,
+    KC_ESC,  LSFT(KC_Z),    KC_COMM,  KC_X,     KC_PSCR,     KC_TRNS, KC_TRNS, KC_BRIU, KC_TRNS,  KC_MSTP,      KC_TRNS, UG_VALU,
+    KC_TRNS, KC_PAST,       KC_LBRC,  KC_ENT,   LCTL(KC_I),  KC_TRNS, KC_TRNS, KC_BRID, KC_MPRV,  KC_MPLY,      KC_MNXT, UG_VALD,
+    KC_CAPS, KC_TRNS,       KC_APP,   KC_EXLM,  LCTL(KC_DOT),KC_TRNS, KC_TRNS, UG_HUEU, UG_PREV,  UG_TOGG,      UG_NEXT, QK_BOOT,
     KC_MUTE, KC_TRNS,       KC_TRNS,  KC_TRNS,  KC_DEL,      KC_NO,   KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,      KC_TRNS, KC_TRNS
   )
 };
@@ -162,7 +162,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 tap_code(KC_VOLU);
                 break;
             default:
-                tap_code(KC_MS_WH_RIGHT);
+                tap_code(QK_MOUSE_WHEEL_RIGHT);
         }
     } else { // anti clockwise
         switch (get_highest_layer(layer_state)) {
@@ -175,7 +175,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 tap_code(KC_VOLD);
                 break;
             default:
-                tap_code(KC_MS_WH_LEFT);
+                tap_code(QK_MOUSE_WHEEL_LEFT);
         }
     }
     return false;

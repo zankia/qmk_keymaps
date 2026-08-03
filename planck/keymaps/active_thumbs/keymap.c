@@ -25,16 +25,16 @@ enum planck_layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_planck_grid(
-    LT(_RAISE, KC_Q),KC_W,           KC_E,           KC_R,           KC_T,           KC_CAPS,        KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_LBRC,
+    LT(_RAISE, KC_Q),KC_W,          KC_E,           KC_R,           KC_T,           KC_CAPS,        KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_LBRC,
     KC_A,           KC_S,           KC_D,           KC_F,           KC_G,           KC_ESCAPE,      KC_H,           KC_J,           KC_K,           KC_L,           KC_SCLN,        KC_QUOTE,
-    MT(MOD_LSFT, KC_Z),KC_X,           KC_C,           KC_V,           MT(MOD_LALT, KC_B),KC_TAB,         KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_SLASH,       MT(MOD_RCTL, KC_RBRC),
-    KC_LEFT_CTRL,   LOWER,          KC_LEFT_GUI,    KC_SPACE,       KC_BSPC,        MT(MOD_RSFT, KC_ENTER),KC_NO,          MT(MOD_RALT, KC_APPLICATION),KC_LEFT,        KC_DOWN,        KC_UP,          KC_RIGHT
+    MT(MOD_LSFT, KC_Z),KC_X,        KC_C,           KC_V,           MT(MOD_LALT, KC_B),KC_TAB,      KC_N,           KC_M,           KC_COMMA,       KC_DOT,         KC_SLASH,       MT(MOD_RCTL, KC_RBRC),
+    KC_LEFT_CTRL,   LOWER,          KC_LEFT_GUI,    KC_SPACE,       KC_BSPC, MT(MOD_RSFT, KC_ENTER),KC_NO, MT(MOD_RALT, KC_APPLICATION), KC_LEFT,   KC_DOWN,        KC_UP,          KC_RIGHT
   ),
 
   [_LOWER] = LAYOUT_planck_grid(
-    LT(_RAISE, KC_GRAVE),KC_1,           KC_2,           KC_3,           KC_4,           KC_5,           KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_DELETE,
+    LT(_RAISE, KC_GRAVE),KC_1,      KC_2,           KC_3,           KC_4,           KC_5,           KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_DELETE,
     KC_PSCR,        KC_TRANSPARENT, KC_HOME,        KC_LPRN,        KC_RPRN,        KC_PAGE_UP,     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_BSLS,
-    LALT(LCTL(KC_DELETE)),KC_TRANSPARENT, KC_END,         LSFT(KC_MINUS), LSFT(KC_EQUAL), KC_PGDN,        KC_TRANSPARENT, KC_TRANSPARENT, KC_MEDIA_STOP,  KC_AUDIO_MUTE,  KC_TRANSPARENT, KC_MEDIA_PLAY_PAUSE,
+    LALT(LCTL(KC_DELETE)),KC_TRANSPARENT, KC_END,   LSFT(KC_MINUS), LSFT(KC_EQUAL), KC_PGDN,        KC_TRANSPARENT, KC_TRANSPARENT, KC_MEDIA_STOP,  KC_AUDIO_MUTE,  KC_TRANSPARENT, KC_MEDIA_PLAY_PAUSE,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_MINUS,       KC_EQUAL,       KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_MEDIA_PREV_TRACK,KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,KC_MEDIA_NEXT_TRACK
   ),
 
@@ -46,9 +46,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [_ADJUST] = LAYOUT_planck_grid(
-    KC_TRANSPARENT, KC_TRANSPARENT, AU_TOGG,        MU_TOGG,        MU_NEXT,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_MS_BTN3,     KC_TRANSPARENT, KC_TRANSPARENT, QK_BOOT,
-    KC_TRANSPARENT, LED_LEVEL,      RGB_MODE_FORWARD,RGB_VAD,        RGB_VAI,        KC_TRANSPARENT, KC_MS_WH_UP,    KC_MS_BTN1,     KC_MS_UP,       KC_MS_BTN2,     KC_TRANSPARENT, KC_TRANSPARENT,
-    KC_TRANSPARENT, RGB_TOG,        TOGGLE_LAYER_COLOR,RGB_HUD,        RGB_HUI,        KC_TRANSPARENT, KC_MS_WH_DOWN,  KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, KC_TRANSPARENT, AU_TOGG,        MU_TOGG,        MU_NEXT,        KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, MS_BTN3,        KC_TRANSPARENT, KC_TRANSPARENT, QK_BOOT,
+    KC_TRANSPARENT, LED_LEVEL,      UG_NEXT,        UG_VALD,        UG_VALU,        KC_TRANSPARENT, QK_MOUSE_WHEEL_UP, MS_BTN1,     MS_UP,          MS_BTN2,        KC_TRANSPARENT, KC_TRANSPARENT,
+    KC_TRANSPARENT, UG_TOGG,        TOGGLE_LAYER_COLOR,UG_HUED,     UG_HUEU,        KC_TRANSPARENT, QK_MOUSE_WHEEL_DOWN, MS_LEFT,   MS_DOWN,        MS_RGHT,        KC_TRANSPARENT, KC_TRANSPARENT,
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
 
@@ -174,16 +174,16 @@ void encoder_update(bool clockwise) {
     } else {
         if (clockwise) {
         #ifdef MOUSEKEY_ENABLE
-            register_code(KC_MS_WH_DOWN);
-            unregister_code(KC_MS_WH_DOWN);
+            register_code(QK_MOUSE_WHEEL_DOWN);
+            unregister_code(QK_MOUSE_WHEEL_DOWN);
         #else
             register_code(KC_PGDN);
             unregister_code(KC_PGDN);
         #endif
         } else {
         #ifdef MOUSEKEY_ENABLE
-            register_code(KC_MS_WH_UP);
-            unregister_code(KC_MS_WH_UP);
+            register_code(QK_MOUSE_WHEEL_UP);
+            unregister_code(QK_MOUSE_WHEEL_UP);
         #else
             register_code(KC_PGUP);
             unregister_code(KC_PGUP);

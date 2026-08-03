@@ -24,9 +24,9 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
         }
     } else {
         if (clockwise) {
-            tap_code(KC_MS_WH_RIGHT);
+            tap_code(QK_MOUSE_WHEEL_RIGHT);
         } else {
-            tap_code(KC_MS_WH_LEFT);
+            tap_code(QK_MOUSE_WHEEL_LEFT);
         }
     }
     return true;
@@ -287,7 +287,7 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
                 eeconfig_update_kb(keyboard_config.raw);
             }
             break;
-        case RGB_TOG:
+        case QK_UNDERGLOW_TOGGLE:
             if (record->event.pressed) {
               switch (rgb_matrix_get_flags()) {
                 case LED_FLAG_ALL: {
