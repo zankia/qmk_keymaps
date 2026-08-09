@@ -10,10 +10,10 @@
     "processor": "RP2040",
     "bootloader": "rp2040",
     "features": {
+        "combo": true,
         "mousekey": true,
         "pointing_device": true
     },
-    "diode_direction": "COL2ROW",
     "matrix_pins": {
         "direct": [["GP8", "GP9"]]
     },

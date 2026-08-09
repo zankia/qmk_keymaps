@@ -1,4 +1,5 @@
 // Copyright 2026 zankia mail@zankia.fr
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #include QMK_KEYBOARD_H
 
