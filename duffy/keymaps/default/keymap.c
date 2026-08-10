@@ -1,7 +1,6 @@
 // Copyright 2026 zankia mail@zankia.fr
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-#include "keycodes.h"
 #include QMK_KEYBOARD_H
 
 enum layer_names {
@@ -28,22 +27,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DRAWING] = LAYOUT(
         KC_TRNS,                     KC_TRNS,
         KC_TRNS,       KC_TRNS,      KC_TRNS,
-        KC_TRNS,       KC_TRNS,      KC_TRNS
+        KC_TRNS,       KC_TRNS,      KC_A
     ),
     [_MODELING] = LAYOUT(
         KC_TRNS,                     KC_TRNS,
         KC_TRNS,       KC_TRNS,      KC_TRNS,
-        KC_TRNS,       KC_TRNS,      KC_TRNS
+        KC_TRNS,       KC_TRNS,      KC_S
     ),
     [_GAMING] = LAYOUT(
         KC_TRNS,                     KC_TRNS,
-        KC_TRNS,       KC_TRNS,      KC_TRNS,
-        KC_TRNS,       KC_TRNS,      KC_TRNS
+        KC_TRNS,       KC_TRNS,      KC_TAB,
+        KC_TRNS,       KC_ENTER,     KC_ALGR
     ),
     [_STREAMING] = LAYOUT(
         KC_TRNS,                     KC_TRNS,
         KC_TRNS,       KC_TRNS,      KC_TRNS,
-        KC_TRNS,       KC_TRNS,      KC_TRNS
+        KC_TRNS,       KC_TRNS,      KC_D
     ),
     [_SELECTOR] = LAYOUT(
         KC_TRNS,                     QK_BOOT,
@@ -54,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [_DEFAULT]   = { ENCODER_CCW_CW(KC_RGHT, KC_LEFT), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [_DEFAULT]   = { ENCODER_CCW_CW(KC_LEFT, KC_RGHT), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [_MEDIA]     = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [_DRAWING]   = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [_MODELING]  = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
@@ -67,35 +66,37 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 #ifdef RGB_MATRIX_ENABLE
 #undef HSV_WHITE
 #define HSV_WHITE   0,  64, 255
+#undef HSV_ORANGE
+#define HSV_ORANGE 10, 255, 255
 
 const hsv_t led_map[][RGB_MATRIX_LED_COUNT] = {
     [_DEFAULT] = {
         {HSV_CYAN},       {HSV_PURPLE}, {HSV_GREEN},
-        {HSV_CYAN},       {HSV_RED},  {HSV_RED}
+        {HSV_CYAN},       {HSV_RED},    {HSV_RED}
     },
     [_MEDIA] = {
         {HSV_CYAN},       {HSV_PURPLE}, {HSV_OFF},
         {HSV_CHARTREUSE}, {HSV_PURPLE}, {HSV_CHARTREUSE}
     },
     [_DRAWING] = {
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}
+        {HSV_OFF},        {HSV_OFF},    {HSV_RED},
+        {HSV_OFF},        {HSV_OFF},    {HSV_OFF}
     },
     [_MODELING] = {
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}
+        {HSV_OFF},        {HSV_OFF},    {HSV_OFF},
+        {HSV_ORANGE},     {HSV_OFF},    {HSV_OFF}
     },
     [_GAMING] = {
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}
+        {HSV_GREEN},      {HSV_PURPLE}, {HSV_CYAN},
+        {HSV_GREEN},      {HSV_CYAN},   {HSV_CYAN}
     },
     [_STREAMING] = {
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF},
-        {HSV_OFF}, {HSV_OFF}, {HSV_OFF}
+        {HSV_OFF},        {HSV_OFF},    {HSV_OFF},
+        {HSV_OFF},        {HSV_OFF},    {HSV_PURPLE}
     },
     [_SELECTOR] = {
-        {HSV_WHITE}, {HSV_CHARTREUSE}, {HSV_RED},
-        {HSV_ORANGE}, {HSV_PURPLE}, {HSV_PURPLE}
+        {HSV_WHITE},  {HSV_CHARTREUSE}, {HSV_RED},
+        {HSV_ORANGE},     {HSV_CYAN},   {HSV_PURPLE}
     },
 };
 
@@ -109,7 +110,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
             if (index >= led_min && index < led_max && index != NO_LED) {
                 hsv_t hsv = led_map[active_layer][
-                    row * sizeof(g_led_config.matrix_co) / sizeof(g_led_config.matrix_co[row]) + col
+                    row * sizeof(g_led_config.matrix_co[row]) / sizeof(g_led_config.matrix_co[row][col]) + col
                 ];
 
                 if (hsv.v > rgb_matrix_get_val()) {
