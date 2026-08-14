@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include QMK_KEYBOARD_H
+#include "keymap_dvorak.h"
+#include "sendstring_dvorak.h"
 
 enum layer_names {
     _DEFAULT,
@@ -13,9 +15,13 @@ enum layer_names {
     _SELECTOR,
 };
 
+enum custom_keycodes {
+    UPLOAD = SAFE_RANGE,
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DEFAULT] = LAYOUT(
-        MO(_SELECTOR),               KC_NO,
+        MO(_SELECTOR),               KC_MUTE,
         KC_PGUP,       MS_BTN3,      KC_APP,
         KC_PGDN,       KC_HOME,      KC_END
     ),
@@ -27,12 +33,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DRAWING] = LAYOUT(
         KC_TRNS,                     KC_TRNS,
         KC_TRNS,       KC_TRNS,      KC_TRNS,
-        KC_TRNS,       KC_TRNS,      KC_A
+        KC_TRNS,       KC_TRNS,      KC_TRNS
     ),
     [_MODELING] = LAYOUT(
-        KC_TRNS,                     KC_TRNS,
-        KC_TRNS,       KC_TRNS,      KC_TRNS,
-        KC_TRNS,       KC_TRNS,      KC_S
+        KC_TRNS,                     UPLOAD,
+        LCTL(DV_O),    LCTL(DV_Z),   KC_ENTER,
+        KC_F5,         KC_F6,        KC_F7
     ),
     [_GAMING] = LAYOUT(
         KC_TRNS,                     KC_TRNS,
@@ -42,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_STREAMING] = LAYOUT(
         KC_TRNS,                     KC_TRNS,
         KC_TRNS,       KC_TRNS,      KC_TRNS,
-        KC_TRNS,       KC_TRNS,      KC_D
+        KC_TRNS,       KC_TRNS,      KC_TRNS
     ),
     [_SELECTOR] = LAYOUT(
         KC_TRNS,                     QK_BOOT,
@@ -83,8 +89,8 @@ const hsv_t led_map[][RGB_MATRIX_LED_COUNT] = {
         {HSV_OFF},        {HSV_OFF},    {HSV_OFF}
     },
     [_MODELING] = {
-        {HSV_OFF},        {HSV_OFF},    {HSV_OFF},
-        {HSV_ORANGE},     {HSV_OFF},    {HSV_OFF}
+        {HSV_GREEN},      {HSV_RED},    {HSV_CYAN},
+        {HSV_ORANGE},     {HSV_ORANGE}, {HSV_ORANGE}
     },
     [_GAMING] = {
         {HSV_GREEN},      {HSV_PURPLE}, {HSV_CYAN},
@@ -126,3 +132,14 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     return false;
 }
 #endif
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+    case UPLOAD:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LGUI("\n") SS_DELAY(500) "upload" SS_DELAY(10) SS_LSFT("G") SS_DELAY(10) "code\n");
+        }
+        break;
+    }
+    return true;
+};
