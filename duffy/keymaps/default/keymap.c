@@ -22,7 +22,7 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DEFAULT] = LAYOUT(
         MO(_SELECTOR),               KC_MUTE,
-        KC_PGUP,       MS_BTN3,      KC_APP,
+        KC_PGUP,       MS_BTN3,      LSA(KC_UP),
         KC_PGDN,       KC_HOME,      KC_END
     ),
     [_MEDIA] = LAYOUT(
@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_MPRV,       KC_MPLY,      KC_MNXT
     ),
     [_DRAWING] = LAYOUT(
-        KC_TRNS,                     KC_TRNS,
+        KC_TRNS,                     QK_CLEAR_EEPROM,
         KC_TRNS,       KC_TRNS,      KC_TRNS,
         KC_TRNS,       KC_TRNS,      KC_TRNS
     ),

@@ -44,7 +44,7 @@ void tap_dance_finished(tap_dance_state_t *state, void *user_data) {
         case 1:
             register_code(QK_MOUSE_BUTTON_2);
             break;
-        case 2:
+        default:
             is_drag_scroll = true;
             break;
     }
@@ -55,7 +55,7 @@ void tap_dance_reset(tap_dance_state_t *state, void *user_data) {
         case 1:
             unregister_code(QK_MOUSE_BUTTON_2);
             break;
-        case 2:
+        default:
             is_drag_scroll = false;
             break;
     }

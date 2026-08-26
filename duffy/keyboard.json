@@ -36,7 +36,7 @@
         ],
         "default": {
             "hue": 180,
-            "val": 127
+            "val": 64
         },
         "sleep": true,
         "timeout": 600000
