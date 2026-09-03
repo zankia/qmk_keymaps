@@ -17,13 +17,14 @@ enum layer_names {
 
 enum custom_keycodes {
     UPLOAD = SAFE_RANGE,
+    GOTO_TEAMS,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DEFAULT] = LAYOUT(
         MO(_SELECTOR),               KC_MUTE,
         KC_PGUP,       MS_BTN3,      LSA(KC_UP),
-        KC_PGDN,       KC_HOME,      KC_END
+        KC_PGDN,       GOTO_TEAMS,   LCS(DV_M)
     ),
     [_MEDIA] = LAYOUT(
         KC_TRNS,                     KC_TRNS,
@@ -78,7 +79,7 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 const hsv_t led_map[][RGB_MATRIX_LED_COUNT] = {
     [_DEFAULT] = {
         {HSV_CYAN},       {HSV_PURPLE}, {HSV_GREEN},
-        {HSV_CYAN},       {HSV_RED},    {HSV_RED}
+        {HSV_CYAN},       {HSV_RED},  {HSV_GREEN}
     },
     [_MEDIA] = {
         {HSV_CYAN},       {HSV_PURPLE}, {HSV_OFF},
@@ -138,6 +139,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case UPLOAD:
         if (record->event.pressed) {
             SEND_STRING(SS_LGUI("\n") SS_DELAY(500) "upload" SS_DELAY(10) SS_LSFT("G") SS_DELAY(10) "code\n");
+        }
+        break;
+    case GOTO_TEAMS:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LALT(" ") SS_DELAY(100) "brave\n" SS_DELAY(500)
+                    SS_LCTL(SS_LSFT("a")) SS_DELAY(100) "teams" SS_DELAY(200) "\n");
         }
         break;
     }
