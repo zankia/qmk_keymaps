@@ -110,7 +110,6 @@ const hsv_t led_map[][RGB_MATRIX_LED_COUNT] = {
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     uint8_t active_layer = get_highest_layer(layer_state);
 
-    //uint8_t pos = 0;
     for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
         for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
             uint8_t index = g_led_config.matrix_co[row][col];

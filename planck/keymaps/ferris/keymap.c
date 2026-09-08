@@ -13,10 +13,10 @@ enum planck_layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_planck_grid(
-     MT(KC_NO,KC_Q), MT(KC_NO,KC_W), MT(KC_NO,KC_E),   MT(KC_NO,KC_R),  MT(KC_NO,KC_T), KC_NO,   KC_NO, MT(KC_NO,KC_Y), MT(KC_NO,KC_U),  MT(KC_NO,KC_I),  MT(KC_NO,KC_O), MT(KC_NO,KC_P),
-     LSFT_T(KC_A),   LT(_NUM,KC_S),  LT(_NAVIGO,KC_D), LT(_LSYMB,KC_F), MT(KC_NO,KC_G), MS_WHLU, KC_NO, MT(KC_NO,KC_H), LT(_RSYMB,KC_J), LT(_MOUSE,KC_K), LT(_FUNC,KC_L), LSFT_T(KC_SCLN),
-     MT(KC_NO,KC_Z), LCTL_T(KC_X),   LALT_T(KC_C),     MT(KC_NO,KC_V),  MT(KC_NO,KC_B), MS_WHLD, KC_NO, MT(KC_NO,KC_N), MT(KC_NO,KC_M),  LALT_T(KC_COMM), LCTL_T(KC_DOT), MT(KC_NO,KC_SLSH),
-     QK_MOUSE_BUTTON_3, QK_MOUSE_BUTTON_2, QK_MOUSE_BUTTON_1, LGUI_T(KC_SPC), KC_BSPC,  MO(_ACCESS), KC_NO, SC_SENT,    RALT_T(KC_TAB),  KC_NO,           KC_NO,          KC_NO
+     KC_Q,         KC_W,              KC_E,              KC_R,            KC_T,     KC_NO,       KC_NO, KC_Y,    KC_U,            KC_I,            KC_O,           KC_P,
+     LSFT_T(KC_A), LT(_NUM,KC_S),     LT(_NAVIGO,KC_D),  LT(_LSYMB,KC_F), KC_G,     MS_WHLU,     KC_NO, KC_H,    LT(_RSYMB,KC_J), LT(_MOUSE,KC_K), LT(_FUNC,KC_L), LSFT_T(KC_SCLN),
+     KC_Z,         LCTL_T(KC_X),      LALT_T(KC_C),      KC_V,            KC_B,     MS_WHLD,     KC_NO, KC_N,    KC_M,            LALT_T(KC_COMM), LCTL_T(KC_DOT), KC_SLSH,
+     LGUI(KC_U),   QK_MOUSE_BUTTON_2, QK_MOUSE_BUTTON_1, LGUI_T(KC_SPC),  KC_BSPC,  MO(_ACCESS), KC_NO, SC_SENT, RALT_T(KC_TAB),  KC_NO,           KC_NO,          KC_NO
   ),
   [_MOUSE] = LAYOUT_planck_grid(
     KC_TRNS, MS_BTN2,       MS_UP,    MS_BTN1,  MS_BTN3,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,      KC_TRNS, KC_TRNS,
@@ -58,12 +58,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ACCESS] = LAYOUT_planck_grid(
     KC_ESC,  LSFT(KC_Z),    KC_COMM,  KC_X,     KC_PSCR,     KC_TRNS, KC_TRNS, KC_BRIU, KC_TRNS,  KC_MSTP,      KC_TRNS, UG_VALU,
     KC_TRNS, KC_PAST,       KC_LBRC,  KC_ENT,   LCTL(KC_I),  KC_TRNS, KC_TRNS, KC_BRID, KC_MPRV,  KC_MPLY,      KC_MNXT, UG_VALD,
-    KC_CAPS, KC_TRNS,       KC_APP,   KC_EXLM,  LCTL(KC_DOT),KC_TRNS, KC_TRNS, UG_HUEU, UG_PREV,  UG_TOGG,      UG_NEXT, QK_BOOT,
+    KC_CAPS, KC_TRNS,       KC_APP,   KC_EXLM,  LCTL(KC_DOT),KC_TRNS, KC_TRNS, UG_HUEU, UG_PREV,TOGGLE_LAYER_COLOR,UG_NEXT,QK_BOOT,
     KC_MUTE, KC_TRNS,       KC_TRNS,  KC_TRNS,  KC_DEL,      KC_NO,   KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,      KC_TRNS, KC_TRNS
   )
 };
 
-const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
+#ifdef RGB_MATRIX_ENABLE
+const hsv_t led_map[][RGB_MATRIX_LED_COUNT] = {
   [_BASE] = {
     {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_OFF}, {HSV_OFF},  {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE}, {HSV_PURPLE},
     {HSV_CYAN},   {HSV_RED},    {HSV_RED},    {HSV_PURPLE}, {HSV_PURPLE}, {HSV_GREEN},{HSV_OFF}, {HSV_PURPLE}, {HSV_RED},    {HSV_RED},    {HSV_RED},    {HSV_CYAN},
@@ -114,40 +115,27 @@ const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
   },
 };
 
-void set_layer_color(int layer) {
-  for (int i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
-    HSV hsv = {
-      .h = pgm_read_byte(&ledmap[layer][i][0]),
-      .s = pgm_read_byte(&ledmap[layer][i][1]),
-      .v = pgm_read_byte(&ledmap[layer][i][2]),
-    };
-    if (!hsv.h && !hsv.s && !hsv.v) {
-        rgb_matrix_set_color(i, 0, 0, 0);
-    } else {
-        float f = (float) rgb_matrix_get_val() / UINT8_MAX;
-        if (i == 36) {
-            f = 1;
-        } else if (i == 41) {
-            f /= 4;
-        }
-        RGB rgb = hsv_to_rgb( hsv );
-        rgb_matrix_set_color(i, f * rgb.r, f * rgb.g, f * rgb.b);
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    if (keyboard_config.disable_layer_led) {
+        return false;
     }
-  }
-}
 
-bool rgb_matrix_indicators_user(void) {
-  if (keyboard_config.disable_layer_led) { return false; }
-  uint8_t current_layer = get_highest_layer(layer_state);
-  if (current_layer >= sizeof(ledmap)) {
-    if (rgb_matrix_get_flags() == LED_FLAG_NONE) {
-      rgb_matrix_set_color_all(0, 0, 0);
+    uint8_t active_layer = get_highest_layer(layer_state);
+
+    for (uint8_t i = 0; i < RGB_MATRIX_LED_COUNT; ++i) {
+        hsv_t hsv = led_map[active_layer][i];
+
+        if (hsv.v > rgb_matrix_get_val()) {
+            hsv.v = rgb_matrix_get_val();
+        }
+
+        rgb_t color = hsv_to_rgb(hsv);
+        rgb_matrix_set_color(i, color.r, color.g, color.b);
     }
-  } else {
-      set_layer_color(current_layer);
-  }
-  return true;
+
+    return false;
 }
+#endif
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
