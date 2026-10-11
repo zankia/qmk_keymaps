@@ -44,6 +44,9 @@ void tap_dance_finished(tap_dance_state_t *state, void *user_data) {
         case 1:
             register_code(QK_MOUSE_BUTTON_2);
             break;
+        case 4:
+            soft_reset_keyboard();
+            break;
         default:
             is_drag_scroll = true;
             break;
