@@ -16,6 +16,7 @@
         "mousekey": true,
         "nkro": true,
         "pointing_device": true,
+        "raw": true,
         "rgb_matrix": true
     },
     "diode_direction": "COL2ROW",

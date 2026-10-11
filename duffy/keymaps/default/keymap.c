@@ -20,6 +20,9 @@ enum custom_keycodes {
     GOTO_TEAMS,
 };
 
+uint8_t volume = 0;
+uint16_t volume_timer;
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DEFAULT] = LAYOUT(
         MO(_SELECTOR),               KC_MUTE,
@@ -114,22 +117,49 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
             uint8_t index = g_led_config.matrix_co[row][col];
 
-            if (index >= led_min && index < led_max && index != NO_LED) {
-                hsv_t hsv = led_map[active_layer][
-                    row * sizeof(g_led_config.matrix_co[row]) / sizeof(g_led_config.matrix_co[row][col]) + col
-                ];
+            if (index == NO_LED || index < led_min || index >= led_max) {
+                continue;
+            }
+
+            hsv_t hsv;
+
+            if (volume == 0) {
+                hsv = led_map[active_layer][row * MATRIX_COLS + col];
 
                 if (hsv.v > rgb_matrix_get_val()) {
                     hsv.v = rgb_matrix_get_val();
                 }
+            } else {
+                hsv = (hsv_t) {85, 255, rgb_matrix_get_val()}; //fully lit
+                uint8_t percent_per_led = 100 / RGB_MATRIX_LED_COUNT;
+                uint8_t floor = (col * (MATRIX_ROWS-1) + row) * percent_per_led; //-1 is a workaround because first row doesn't have LED
 
-                rgb_t color = hsv_to_rgb(hsv);
-                rgb_matrix_set_color(index, color.r, color.g, color.b);
+                if (volume < floor + percent_per_led) {
+                    if (volume > floor) { // partially lit
+                        hsv.h = (uint8_t)(248 + (uint16_t)((volume - floor) * 64) / percent_per_led);
+                    } else { // off
+                        hsv.v = 0;
+                    }
+                }
+
+                if (timer_elapsed(volume_timer) > 1000) {
+                    volume = 0;
+                }
             }
+
+            rgb_t color = hsv_to_rgb(hsv);
+            rgb_matrix_set_color(index, color.r, color.g, color.b);
         }
     }
 
     return false;
+}
+#endif
+
+#ifdef RAW_ENABLE
+void raw_hid_receive(uint8_t *data, uint8_t length) {
+    volume = data[0];
+    volume_timer = timer_read();
 }
 #endif
 
